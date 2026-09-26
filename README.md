@@ -24,6 +24,14 @@ VaaWaa is an ad-free world-news aggregator I built on a custom PHP stack. It pul
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white) ![RSS](https://img.shields.io/badge/RSS-FFA500?style=flat&logo=rssfeed=rss&logoColor=white) ![Cron](https://img.shields.io/badge/Cron-333333?style=flat) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
 
+## Pipeline and evidence boundary
+
+The documented flow is publisher RSS → scheduled ingestion → normalization/deduplication → country/category feeds → reading pages. RSS items are external data: attribution, timestamp interpretation, malformed feeds and repeated headlines are the main boundaries to explain.
+
+Useful acceptance checks are: identical stories do not multiply on repeated imports; failed feeds retain prior usable data; one broken publisher does not block the entire refresh; and displayed freshness reflects the last successful import. These checks describe the intended quality bar, not a test result from private source.
+
+This repository contains documentation and artwork only. The feed parser, scheduler and deduplication implementation are private, and no measured ingestion success rate or latency is published here.
+
 ## About this repository
 
 This is a **case study** of a production project I designed, built and maintain. The application is live at **[vaawaa.com](https://vaawaa.com/)**. The source code is proprietary and kept private — this page documents the work and the engineering behind it.
